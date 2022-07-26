@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clubhouse</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="has-background-grey-light">
+
+      <% if flash[:notice] %>
+        <div id="one" class="notification is-primary global-notification mt-6">
+          <p class="notice"><%= notice %></p>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div id="one" class="notification is-primary global-notification mt-6">
+          <p class="alert"><%= alert %></p>
+        </div>
+      <% end %>
+      <nav class="navbar is-info is-fixed-top mb-4">
+          <div class="navbar-brand">
+            <%= link_to root_path, class:"navbar-item" do %>
+              <h1 class="title is-3">Clubhouse</h1>
+            <% end %>
+            <div class="navbar-burger burger" data-target="navbarExample">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+          </div>
+          <div id="navbarExample" class="navbar-menu">
+            <div class="navbar-end">
+              <div class="field is-grouped">
+                <% if user_signed_in? %>
+                  <p class="control">
+                    <%= link_to 'New Post' ,root_path, class:"button is-info is-inverted mt-1" %>
+                  </p>
+                  <p class="control">
+                     <%= link_to current_user.name, edit_user_registration_path, class:"button is-info  is-inverted mt-1" %>
+                  </p>
+                  <p class="control">
+                     <%= link_to "Log Out", destroy_user_session_path, :method => :delete, class:"button is-info  is-inverted mt-1 mr-2" %>
+                  </p>
+                  <% else %>
+                    <p class="control">
+                     <%= link_to "Sign In", new_user_session_path, class:"button is-info is-inverted mt-1"%>
+                    </p>
+                    <p class="control">
+                     <%= link_to "Sign Up", new_user_registration_path, class:"button is-info is-inverted mr-2 mt-1"%>
+                    </p>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </nav>   
+    <%= yield %>
+
+    <footer class="footer hero is-small has-background-grey-lighter">
+  <div class="content has-text-centered">
+    
+  </div>
+</footer>
+<h6 class= "has-text-centered">copyright © 2022-skd<h6>
+  </body>
+
+  <script>
+    var notification = document.getElementById("one");
+      setTimeout(function() {
+        notification.style.visibility='hidden'}, 1000)
+  </script>
+</html>

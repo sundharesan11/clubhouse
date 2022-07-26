@@ -1,0 +1,35 @@
+<div class="column is-one-quarter mt-6">
+    <nav class="panel">
+        <p class="panel-heading">
+            Your Profile
+        </p>
+        <div class="panel-block">
+            <article class="media">
+                <div class="media-left">
+                    <p class="image is-64x64">
+                        <%= image_tag "profile.png" %>
+                    </p>
+                </div>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong><%= current_user.name %></strong>
+                            <br>
+                            <small><%= current_user.username %></small>
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="panel-block">
+            <div class="level is-mobile">
+                <div class="level-item has-centered-text">
+                    <div>
+                        <p class="title is-6">Secrets shared</p>
+                        <p class="title is-6"><%= current_user.posts.count %></p>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </nav>
+</div>
